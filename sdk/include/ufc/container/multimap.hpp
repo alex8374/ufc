@@ -1,0 +1,101 @@
+/*******************************************************************************
+        Copyright(C) 2016~2026, Free software engineer and contributor
+ *******************************************************************************
+  Filename   : ufc/container/multimap.hpp
+  Author     : cqli[lichangqing1983@sina.com]
+  Date       : 2016-05-24
+  Description: 
+  History    : 
+*******************************************************************************/
+#ifndef UFC_CONTAINER_MULTIMAP_HPP
+#define UFC_CONTAINER_MULTIMAP_HPP
+
+#include <ufc/base/config.hpp>
+#include <multimap>
+#include <algorithm>
+
+namespace ufc {
+
+    template <class Key, class Value>
+    class multimap: public std::multimap<Key, Value>, virtual public object
+    {
+        typedef typename std::multimap<Key, Value>          super_type;
+
+    public:
+        typedef typename super_type::pointer                pointer;
+        typedef typename super_type::const_pointer          const_pointer;
+        typedef typename super_type::reference              reference;
+        typedef typename super_type::const_reference        const_reference;
+        typedef typename super_type::iterator               iterator;
+        typedef typename super_type::const_iterator         const_iterator;
+        typedef typename super_type::size_type              size_type;
+        typedef typename super_type::difference_type        difference_type;
+        typedef typename super_type::reverse_iterator       reverse_iterator;
+        typedef typename super_type::const_reverse_iterator const_reverse_iterator;
+
+    public:
+        multimap()
+        {
+        }
+
+        multimap(const multimap& __other)
+            : super_type(__other)
+        {
+        }
+
+        template <class InputIterator>
+        multimap(InputIterator __first, InputIterator __last)
+            : super_type(__first, __last)
+        {
+        }
+
+        virtual ~multimap()
+        {
+        }
+        
+        multimap& operator = (const multimap& __other)
+        {
+            super_type::operator = (__other);
+            return *this;
+        }
+
+        void swap(multimap& __other)
+        {
+            std::swap(dynamic_cast<super_type&>(*this), dynamic_cast<super_type&>(__other));
+        }
+
+    public:
+        bool operator == (const multimap& __other) const
+        {
+            return dynamic_cast<const super_type&>(*this) == dynamic_cast<const super_type&>(__other) ;
+        }
+
+        bool operator != (const multimap& __other) const
+        {
+            return dynamic_cast<const super_type&>(*this) != dynamic_cast<const super_type&>(__other) ;
+        }
+
+        bool operator >= (const multimap& __other) const
+        {
+            return dynamic_cast<const super_type&>(*this) >= dynamic_cast<const super_type&>(__other) ;
+        }
+
+        bool operator >  (const multimap& __other) const
+        {
+            return dynamic_cast<const super_type&>(*this) > dynamic_cast<const super_type&>(__other) ;
+        }
+
+        bool operator <= (const multimap& __other) const
+        {
+            return dynamic_cast<const super_type&>(*this) <= dynamic_cast<const super_type&>(__other) ;
+        }
+
+        bool operator <  (const multimap& __other) const
+        {
+            return dynamic_cast<const super_type&>(*this) < dynamic_cast<const super_type&>(__other) ;
+        }
+    };
+
+}//namespace ufc
+
+#endif//UFC_CONTAINER_MULTIMAP_HPP
