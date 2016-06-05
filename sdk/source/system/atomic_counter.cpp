@@ -10,7 +10,7 @@
 
 #include "ufc/system/atomic_counter.hpp"
 #include "ufc/exception/assert.hpp"
-#if defined(_WIN32) || defined(WIN32)
+#if defined(ufc_os_family_windows)
 #include "system/atomic_counter_win32.hpp"
 #else
 #include "system/atomic_counter_unix.hpp"

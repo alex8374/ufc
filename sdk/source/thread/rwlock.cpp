@@ -11,7 +11,7 @@
 #include "ufc/thread/rwlock.hpp"
 #include "ufc/exception/assert.hpp"
 #include "ufc/exception/exception.hpp"
-#if defined(_WIN32) || defined(WIN32)
+#if defined(ufc_os_family_windows)
 #include "thread/rwlock_win32.hpp"
 #else
 #include "thread/rwlock_posix.hpp"

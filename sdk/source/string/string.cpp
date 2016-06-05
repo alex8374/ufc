@@ -40,7 +40,7 @@ namespace ufc {
 
     template <> int char_traits<char>::icompare(const char_type* __s1, const char_type* __s2)
     {
-#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+#if defined(ufc_os_family_windows)
         return stricmp(__s1, __s2);
 #else
         return strcasecmp(__s1, __s2);
@@ -49,7 +49,7 @@ namespace ufc {
 
     template <> int char_traits<char>::icompare(const char_type* __s1, const char_type* __s2, std::size_t __n)
     {
-#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+#if defined(ufc_os_family_windows)
         return strnicmp(__s1, __s2, __n);
 #else
         return strncasecmp(__s1, __s2, __n);
@@ -282,7 +282,7 @@ namespace ufc {
 
     template <> int char_traits<char>::vscanf(const char_type* __s, const char_type* __fmt, va_list __args)
     {
-#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+#if defined(ufc_os_family_windows)
         return vsscanf(__s, __fmt, __args);
 #else
         va_list __copy_args;
@@ -303,7 +303,7 @@ namespace ufc {
 
     template <> int char_traits<char>::vprintf(char_type* __buf, std::size_t __n, const char_type* __fmt, va_list __args)
     {
-#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+#if defined(ufc_os_family_windows)
         return vsnprintf(__buf, __n, __fmt, __args);
 #else
         va_list __copy_args;
@@ -318,7 +318,7 @@ namespace ufc {
 
     template <> int char_traits<wchar_t>::icompare(const char_type* __s1, const char_type* __s2)
     {
-#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+#if defined(ufc_os_family_windows)
         return wcsicmp(__s1, __s2);
 #else
         return wcscasecmp(__s1, __s2);
@@ -327,7 +327,7 @@ namespace ufc {
 
     template <> int char_traits<wchar_t>::icompare(const char_type* __s1, const char_type* __s2, std::size_t __n)
     {
-#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+#if defined(ufc_os_family_windows)
         return wcsnicmp(__s1, __s2, __n);
 #else
         return wcsncasecmp(__s1, __s2, __n);
@@ -560,7 +560,7 @@ namespace ufc {
 
     template <> int char_traits<wchar_t>::vscanf(const char_type* __s, const char_type* __fmt, va_list __args)
     {
-#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+#if defined(ufc_os_family_windows)
         return vswscanf(__s, __fmt, __args);
 #else
         va_list __copy_args;
@@ -581,7 +581,7 @@ namespace ufc {
 
     template <> int char_traits<wchar_t>::vprintf(char_type* __buf, std::size_t __n, const char_type* __fmt, va_list __args)
     {
-#if defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(WIN64)
+#if defined(ufc_os_family_windows)
         return vswprintf(__buf, __n, __fmt, __args);
 #else
         va_list __copy_args;
@@ -1029,7 +1029,7 @@ namespace ufc {
         return __build_in_count(*this, __c);
     }
 
-    template <>  basic_string<wchar_t>::size_type basic_string<wchar_t>::count(value_type __c) const
+    template <> basic_string<wchar_t>::size_type basic_string<wchar_t>::count(value_type __c) const
     {
         return __build_in_count(*this, __c);
     }
@@ -1042,6 +1042,26 @@ namespace ufc {
     template <> basic_string<wchar_t>::size_type basic_string<wchar_t>::count(const super_type& __substr) const
     {
         return __build_in_count(*this, __substr);
+    }
+
+    template <> bool basic_string<wchar_t>::has(const super_type& __str, size_type __pos) const
+    {
+        return super_type::find(__str, __pos) != npos;
+    }
+
+    template <> bool basic_string<wchar_t>::has(const value_type& __c, size_type __pos) const
+    {
+        return super_type::find(__c, __pos) != npos;
+    }
+
+    template <> bool basic_string<char>::has(const super_type& __str, size_type __pos) const
+    {
+        return super_type::find(__str, __pos) != npos;
+    }
+
+    template <> bool basic_string<char>::has(const value_type& __c, size_type __pos) const
+    {
+        return super_type::find(__c, __pos) != npos;
     }
 
     template <> bool basic_string<char>::is_digit() const

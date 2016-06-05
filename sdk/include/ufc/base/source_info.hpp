@@ -10,7 +10,9 @@
 #ifndef UFC_BASE_SOURCEINFO_HPP
 #define UFC_BASE_SOURCEINFO_HPP
 
-#include <ufc/base/config.hpp>
+#include <ufc/base/platform.hpp>
+#include <ufc/base/types.hpp>
+#include <ufc/base/object.hpp>
 
 namespace ufc {
 

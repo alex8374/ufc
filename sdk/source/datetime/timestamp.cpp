@@ -12,7 +12,7 @@
 #include "ufc/exception/exception.hpp"
 #include <algorithm>
 #include <cmath>
-#if defined(_WIN32) || defined(WIN32)
+#if defined(ufc_os_family_windows)
 #include <Windows.h>
 #else
 #include <time.h>
@@ -69,7 +69,7 @@ namespace ufc {
 
     timestamp& timestamp::update()
     {
-#if defined(_WIN32) || defined(WIN32)
+#if defined(ufc_os_family_windows)
 
         FILETIME __ft;
         GetSystemTimeAsFileTime(&__ft);
@@ -96,7 +96,7 @@ namespace ufc {
         return *this;
     }
 
-#if defined(_WIN32) || defined(WIN32)
+#if defined(ufc_os_family_windows)
 
     timestamp timestamp::from_file_time_np(uint32_t __file_time_low, uint32_t __file_time_high)
     {

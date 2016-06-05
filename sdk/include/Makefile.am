@@ -8,8 +8,10 @@ includedir = $(prefix)/include
 #include_HEADERS        = ufc/ufc.hpp
 
 nobase_include_HEADERS = ufc/ufc.hpp \
-                       ufc/base/types.hpp \
                        ufc/base/config.hpp \
+                       ufc/base/platform.hpp \
+                       ufc/base/types.hpp \
+                       ufc/base/object.hpp \
                        ufc/base/memory.hpp \
                        ufc/base/source_info.hpp \
                        ufc/base/numeric.hpp \
@@ -61,4 +63,9 @@ nobase_include_HEADERS = ufc/ufc.hpp \
                        ufc/thread/thread.hpp \
                        ufc/thread/thread_local.hpp \
                        ufc/thread/thread_pool.hpp \
-                       ufc/thread/thread_group.hpp
+                       ufc/thread/thread_group.hpp \
+                       ufc/network/socketdefs.hpp \
+                       ufc/network/ip_address.hpp \
+                       ufc/network/socket_address.hpp \
+                       ufc/network/host_entry.hpp \
+                       ufc/network/dns.hpp

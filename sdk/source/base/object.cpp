@@ -8,7 +8,7 @@
   History    : 
 *******************************************************************************/
 
-#include "ufc/base/config.hpp"
+#include "ufc/base/object.hpp"
 #include "ufc/thread/mutex.hpp"
 #include "ufc/string/string.hpp"
 #include <cctype>

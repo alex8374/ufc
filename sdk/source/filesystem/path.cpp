@@ -15,7 +15,7 @@
 #include "ufc/system/environment.hpp"
 #include "ufc/container/buffer.hpp"
 #include <algorithm>
-#if defined(_WIN32) || defined(WIN32)
+#if defined(ufc_os_family_windows)
 #include "filesystem/path_win32.hpp"
 #else
 #include "filesystem/path_unix.hpp"
@@ -473,7 +473,7 @@ namespace ufc {
         string_vec::const_iterator __end = __st.end();
         while (__it != __end)
         {
-#if defined(WIN32) || defined(_WIN32)
+#if defined(ufc_os_family_windows)
             string __clean_path(*__it);
             if (__clean_path.size() > 1 && __clean_path[0] == '"' && __clean_path[__clean_path.size() - 1] == '"')
             {

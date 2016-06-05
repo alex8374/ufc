@@ -10,8 +10,6 @@
 #ifndef UFC_BASE_TYPES_HPP
 #define UFC_BASE_TYPES_HPP
 
-#include <ufc/base/config.hpp>
-
 namespace ufc {
 
     typedef unsigned char               byte_t;
@@ -148,7 +146,7 @@ namespace ufc {
     ///
     /// @breif: alignment
     ///
-    enum alignment
+    enum alignment_t
     {
         al_left   = 1, /// align left
         al_middle = 2, /// align middle

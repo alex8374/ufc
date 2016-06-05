@@ -131,7 +131,6 @@ namespace ufc {
 
     ufc_declare_exception(protocol_error,                   io_error)
     ufc_declare_exception(file_error,                       io_error)
-    ufc_declare_exception(net_error,                        io_error)
 
     ufc_declare_exception(file_exists_error,                file_error)
     ufc_declare_exception(file_not_found_error,             file_error)
@@ -142,19 +141,6 @@ namespace ufc {
     ufc_declare_exception(open_file_error,                  file_error)
     ufc_declare_exception(write_file_error,                 file_error)
     ufc_declare_exception(read_file_error,                  file_error)
-
-    ufc_declare_exception(invalid_address_error,            net_error)
-    ufc_declare_exception(invalid_socket_error,             net_error)
-    ufc_declare_exception(service_not_found_error,          net_error)
-    ufc_declare_exception(connection_aborted_error,         net_error)
-    ufc_declare_exception(connection_reset_error,           net_error)
-    ufc_declare_exception(connection_refused_error,         net_error)
-    ufc_declare_exception(dns_error,                        net_error)
-    ufc_declare_exception(ftp_error,                        net_error)
-    ufc_declare_exception(smtp_error,                       net_error)
-
-    ufc_declare_exception(host_not_found_error,             dns_error)
-    ufc_declare_exception(address_not_found_error,          dns_error)
 
 }//namespace ufc
 

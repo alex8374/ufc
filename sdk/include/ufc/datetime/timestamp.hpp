@@ -86,7 +86,7 @@ namespace ufc {
         static time_val resolution; /// one second per second 
         static time_val utc_time;   
 
-#if defined(_WIN32) || defined(WIN32)
+#if defined(ufc_os_family_windows)
         static timestamp from_file_time_np(uint32_t __file_time_low, uint32_t __file_time_high);
 
         void to_file_time_np(uint32_t& __file_time_low, uint32_t& __file_time_high) const;

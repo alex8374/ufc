@@ -11,7 +11,7 @@
 #include "ufc/thread/semaphore.hpp"
 #include "ufc/exception/exception.hpp"
 #include "ufc/exception/assert.hpp"
-#if defined(_WIN32) || defined(WIN32)
+#if defined(ufc_os_family_windows)
 #include "thread/semaphore_win32.hpp"
 #else
 #include "thread/semaphore_posix.hpp"

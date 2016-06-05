@@ -11,7 +11,7 @@
 #include "ufc/system/environment.hpp"
 #include "ufc/exception/exception.hpp"
 #include "ufc/thread/mutex.hpp"
-#if defined(_WIN32) || defined(WIN32)
+#if defined(ufc_os_family_windows)
 #include "system/environment_win32.hpp"
 #else
 #include "system/environment_unix.hpp"

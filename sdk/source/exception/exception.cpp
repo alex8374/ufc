@@ -125,7 +125,6 @@ namespace ufc {
 
     ufc_implement_exception(protocol_error,                   io_error,         "protocal error")
     ufc_implement_exception(file_error,                       io_error,         "file access error")
-    ufc_implement_exception(net_error,                        io_error,         "network error")
 
     ufc_implement_exception(file_exists_error,                file_error,       "file exists")
     ufc_implement_exception(file_not_found_error,             file_error,       "file not found")
@@ -136,18 +135,5 @@ namespace ufc {
     ufc_implement_exception(open_file_error,                  file_error,       "cannot open file")
     ufc_implement_exception(write_file_error,                 file_error,       "cannot write file")
     ufc_implement_exception(read_file_error,                  file_error,       "cannot read file")
-
-    ufc_implement_exception(invalid_address_error,            net_error,        "invalid address")
-    ufc_implement_exception(invalid_socket_error,             net_error,        "invalid socket")
-    ufc_implement_exception(service_not_found_error,          net_error,        "service not found")
-    ufc_implement_exception(connection_aborted_error,         net_error,        "software caused connection abort")
-    ufc_implement_exception(connection_reset_error,           net_error,        "connection reset by peer")
-    ufc_implement_exception(connection_refused_error,         net_error,        "connection refused")
-    ufc_implement_exception(dns_error,                        net_error,        "dns error")
-    ufc_implement_exception(ftp_error,                        net_error,        "ftp error")
-    ufc_implement_exception(smtp_error,                       net_error,        "smtp error")
-
-    ufc_implement_exception(host_not_found_error,             dns_error,        "host not found")
-    ufc_implement_exception(address_not_found_error,          dns_error,        "not address found")
 
 }//namespace ufc

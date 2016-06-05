@@ -10,26 +10,6 @@
 #ifndef UFC_BASE_CONFIG_HPP
 #define UFC_BASE_CONFIG_HPP
 
-#if defined(_WIN32) || defined(WIN32) && defined(_DLL)
-    #if defined(ufc_exports)
-        #define ufc_api __declspec(dllexport)
-    #else
-        #define ufc_api __declspec(dllimport)
-    #endif
-#else
-    #define ufc_api
-#endif
-
-#if defined(_WIN32) || defined(WIN32)
-    #pragma warning(disable:4520)
-    #pragma warning(disable:4251)
-    #pragma warning(disable:4996)
-    #pragma warning(disable:4244)
-    #pragma warning(disable:4275)
-    #pragma warning(disable:4099) 
-    #pragma warning(disable:4290)
-#endif//defined(_WIN32) || defined(WIN32)
-
 #define __ufc_do_string(__s)        #__s
 #define ufc_string(__s)             __ufc_do_string(__s)
 
@@ -60,40 +40,15 @@
 #include <sstream>
 #include <iostream>
 #include <stdexcept>
-#if !defined(_WIN32) && !defined(WIN32)
+#if !defined(_WIN32)
 #include <unistd.h>
 #include <signal.h>
 #include <sys/wait.h>
-#endif//!defined(_WIN32) && !defined(WIN32)
+#endif//!defined(_WIN32)
 
+#include <ufc/base/platform.hpp>
 #include <ufc/base/types.hpp>
-
-namespace ufc {
-
-    class ufc_api object
-    {
-    public:
-        virtual ~object();
-
-        intptr_t hash_code() const;
-
-    public:
-        static const char* get_class_name(const std::type_info& __typeinfo);
-
-    protected:
-        object();
-
-    private:
-        object(const object&);
-        object& operator = (const object&);
-    };
-
-}//namespace ufc
-
-#ifndef ufc_typename
-#define ufc_typename(__type)    ufc::object::get_class_name(typeid(__type))
-#endif//ufc_typename
-
+#include <ufc/base/object.hpp>
 #include <ufc/base/memory.hpp>
 #include <ufc/base/source_info.hpp>
 #include <ufc/base/numeric.hpp>

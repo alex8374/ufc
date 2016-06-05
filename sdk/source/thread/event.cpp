@@ -11,7 +11,7 @@
 #include "ufc/thread/event.hpp"
 #include "ufc/exception/assert.hpp"
 #include "ufc/exception/exception.hpp"
-#if defined(_WIN32) || defined(WIN32)
+#if defined(ufc_os_family_windows)
 #include "thread/event_win32.hpp"
 #else
 #include "thread/event_posix.hpp"

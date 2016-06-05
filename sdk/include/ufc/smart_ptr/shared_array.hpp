@@ -152,8 +152,8 @@ namespace ufc {
             _counter->duplicate();
         }
 
-        T*                _parray;
-        RefCountedObject* _counter;
+        T*                  _parray;
+        ref_counted_object* _counter;
     };
 
     template <class T, class U> inline bool operator == (const shared_array<T>& __rhs, const shared_array<U>& __lhs)
@@ -249,4 +249,3 @@ namespace ufc {
 }//namespace ufc
 
 #endif//UFC_CORE_SHAREDARRAY_HPP
-

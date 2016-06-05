@@ -60,7 +60,7 @@
 #include <ufc/thread/thread_pool.hpp>
 #include <ufc/thread/thread_group.hpp>
 
-#if defined(WIN32) || defined(_WIN32)
+#if defined(ufc_os_family_windows)
     #if !defined(ufc_no_automatic_libs)
         #pragma comment(lib, "ufc.lib")
     #endif

@@ -1,5 +1,5 @@
 AUTOMAKE_OPTIONS = foreign
-AM_CPPFLAGS = -I$(top_srcdir)/include
+AM_CPPFLAGS = -I$(top_srcdir)/include -Dufc_have_ipv6
 SUBDIRS =
 
 #
@@ -7,7 +7,7 @@ SUBDIRS =
 lib_LTLIBRARIES = libufc.la
 
 libufc_la_LDFLAGS = -version-info $(VERSION_INFO) -lpthread -ldl -lrt -lm
-libufc_la_SOURCES = base/config.cpp \
+libufc_la_SOURCES = base/object.cpp \
 					base/source_info.cpp \
 					base/numeric.cpp \
 					datetime/timestamp.cpp \
@@ -63,5 +63,10 @@ libufc_la_SOURCES = base/config.cpp \
 					thread/thread_local_win32.hpp \
 					thread/thread_local_posix.hpp \
 					thread/thread_group.cpp \
-					thread/thread_pool.cpp
+					thread/thread_pool.cpp \
+					network/socketdefs.cpp \
+					network/ip_address.cpp \
+					network/socket_address.cpp \
+					network/host_entry.cpp \
+					network/dns.cpp 
 

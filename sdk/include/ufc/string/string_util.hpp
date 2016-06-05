@@ -86,7 +86,7 @@ namespace ufc {
 
         static string fill(const string&      __str,
                            string::size_type  __width,
-                           alignment          __align = al_left,
+                           alignment_t        __align = al_left,
                            string::value_type __fillc = string::traits_type::space_char);
     };
 

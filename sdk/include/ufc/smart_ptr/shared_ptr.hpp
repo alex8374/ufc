@@ -363,4 +363,3 @@ namespace ufc {
 }//namespace ufc
 
 #endif//UFC_CORE_SHAREDPTR_HPP
-

@@ -9,6 +9,7 @@
 *******************************************************************************/
 
 #include "ufc/base/numeric.hpp"
+#include <cmath>
 
 namespace ufc {
 

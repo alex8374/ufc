@@ -48,22 +48,22 @@ namespace ufc {
         static char_type to_upper(char_type __c);
 
         static bool     as_boolean(const char_type* __s);
-        static int      as_int32(const char_type* __s);
-        static unsigned as_uint32(const char_type* __s);
-        static unsigned as_hex32(const char_type* __s);
+        static int32_t  as_int32(const char_type* __s);
+        static uint32_t as_uint32(const char_type* __s);
+        static uint32_t as_hex32(const char_type* __s);
         static int64_t  as_int64(const char_type* __s);
         static uint64_t as_uint64(const char_type* __s);
         static uint64_t as_hex64(const char_type* __s);
         static double   as_double(const char_type* __s);
 
-        static int icompare(const char_type* __s1, const char_type* __s2);
-        static int icompare(const char_type* __s1, const char_type* __s2, std::size_t __n);
+        static int32_t icompare(const char_type* __s1, const char_type* __s2);
+        static int32_t icompare(const char_type* __s1, const char_type* __s2, std::size_t __n);
 
-        static int scanf (const char_type* __s, const char_type* __fmt, ...);
-        static int vscanf(const char_type* __s, const char_type* __fmt, va_list __args);
+        static int32_t scanf (const char_type* __s, const char_type* __fmt, ...);
+        static int32_t vscanf(const char_type* __s, const char_type* __fmt, va_list __args);
 
-        static int printf (char_type* __buf, std::size_t __n, const char_type* __fmt, ...);
-        static int vprintf(char_type* __buf, std::size_t __n, const char_type* __fmt, va_list __args);
+        static int32_t printf (char_type* __buf, std::size_t __n, const char_type* __fmt, ...);
+        static int32_t vprintf(char_type* __buf, std::size_t __n, const char_type* __fmt, va_list __args);
 
         static const char_type space_char;
     };
@@ -199,12 +199,12 @@ namespace ufc {
         basic_string left(size_type __n) const;
         basic_string right(size_type __n) const;
 
-        int icompare(const super_type& __str2) const;
-        int icompare(size_type __pos, size_type __n, const super_type& __str2) const;
-        int icompare(size_type __pos, size_type __n, const super_type& __str2, size_type __pos2, size_type __n2) const; // build-in
-        int icompare(const_pointer __s2) const;
-        int icompare(size_type __pos, size_type __n, const_pointer __s2) const;
-        int icompare(size_type __pos, size_type __n, const_pointer __s2, size_type __n2) const; // build-in
+        int32_t icompare(const super_type& __str2) const;
+        int32_t icompare(size_type __pos, size_type __n, const super_type& __str2) const;
+        int32_t icompare(size_type __pos, size_type __n, const super_type& __str2, size_type __pos2, size_type __n2) const; // build-in
+        int32_t icompare(const_pointer __s2) const;
+        int32_t icompare(size_type __pos, size_type __n, const_pointer __s2) const;
+        int32_t icompare(size_type __pos, size_type __n, const_pointer __s2, size_type __n2) const; // build-in
 
         bool start_with(const super_type& __prefix) const;
         bool start_with(value_type __prefix) const;
@@ -230,8 +230,8 @@ namespace ufc {
         basic_string& trim_right(); // build-in
         basic_string& trim_left(); // build-in
 
-        int scanf (const_pointer __fmt, ...) const;
-        int vscanf(const_pointer __fmt, va_list __args) const; // build-in
+        int32_t scanf (const_pointer __fmt, ...) const;
+        int32_t vscanf(const_pointer __fmt, va_list __args) const; // build-in
 
         basic_string& printf (const_pointer __fmt, ...);
         basic_string& vprintf(const_pointer __fmt, va_list __args); // build-in
@@ -241,19 +241,22 @@ namespace ufc {
         size_type count(value_type __c) const; // build-in
         size_type count(const super_type& __substr) const; // build-in
 
-        bool is_digit() const; // build-in
-        bool is_xdigit() const; // build-in
-        bool is_decimal() const; // build-in
-        bool is_boolean() const; // build-in
+        bool has(const super_type& __str, size_type __pos = 0) const;
+        bool has(const value_type& __c, size_type __pos = 0) const;
 
-        int      as_int32() const; // build-in
-        unsigned as_uint32() const; // build-in
-        unsigned as_hex32() const; // build-in
-        int64_t  as_int64() const; // build-in
-        uint64_t as_uint64() const; // build-in
-        uint64_t as_hex64() const; // build-in
-        double   as_double() const; // build-in
-        bool     as_boolean() const;// build-in
+        bool is_digit() const;
+        bool is_xdigit() const;
+        bool is_decimal() const;
+        bool is_boolean() const;
+
+        int32_t  as_int32() const;
+        uint32_t as_uint32() const;
+        uint32_t as_hex32() const;
+        int64_t  as_int64() const;
+        uint64_t as_uint64() const;
+        uint64_t as_hex64() const;
+        double   as_double() const;
+        bool     as_boolean() const;
 
     public:
         static basic_string format (const_pointer __fmt, ...);
@@ -263,8 +266,8 @@ namespace ufc {
     typedef basic_string<char>      string;
     typedef basic_string<wchar_t>   wstring;
 
-    typedef vector<string>     string_vec;
-    typedef vector<string>     wstring_vec;
+    typedef vector<string>          string_vec;
+    typedef vector<string>          wstring_vec;
     ////////////////////////////////////////////////////////////////////////////
 
     template <class CharT>
@@ -670,25 +673,25 @@ namespace ufc {
     }
 
     template <class CharT>
-    inline int basic_string<CharT>::icompare(const super_type& __str2) const
+    inline int32_t basic_string<CharT>::icompare(const super_type& __str2) const
     {
         return icompare(0, super_type::length(), __str2.c_str(), __str2.length());
     }
 
     template <class CharT>
-    inline int basic_string<CharT>::icompare(size_type __pos, size_type __n, const super_type& __str2) const
+    inline int32_t basic_string<CharT>::icompare(size_type __pos, size_type __n, const super_type& __str2) const
     {
         return icompare(__pos, __n, __str2.c_str(), __str2.length());
     }
 
     template <class CharT>
-    inline int basic_string<CharT>::icompare(const_pointer __s2) const
+    inline int32_t basic_string<CharT>::icompare(const_pointer __s2) const
     {
         return traits_type::icompare(super_type::c_str(), __s2);
     }
 
     template <class CharT>
-    inline int basic_string<CharT>::icompare(size_type __pos, size_type __n, const_pointer __s2) const
+    inline int32_t basic_string<CharT>::icompare(size_type __pos, size_type __n, const_pointer __s2) const
     {
         return icompare(__pos, __n, __s2, __s2? traits_type::length(__s2): 0);
     }
@@ -794,11 +797,11 @@ namespace ufc {
     }
 
     template <class CharT>
-    inline int basic_string<CharT>::scanf(const_pointer __fmt, ...) const
+    inline int32_t basic_string<CharT>::scanf(const_pointer __fmt, ...) const
     {
         va_list __args;
         va_start(__args, __fmt);
-        int __res = this->vscanf(__fmt, __args);
+        int32_t __res = this->vscanf(__fmt, __args);
         va_end(__args);
         return __res;
     }

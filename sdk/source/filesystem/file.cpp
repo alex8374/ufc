@@ -11,7 +11,7 @@
 #include "ufc/filesystem/file.hpp"
 #include "ufc/exception/assert.hpp"
 #include "ufc/exception/exception.hpp"
-#if defined(_WIN32) || defined(WIN32)
+#if defined(ufc_os_family_windows)
 #include "filesystem/file_win32.hpp"
 #else
 #include "filesystem/file_unix.hpp"

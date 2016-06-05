@@ -500,7 +500,7 @@ namespace ufc {
         return ostr.str();
     }
 
-    string string_util::fill(const string& __s, string::size_type __width, alignment __align, string::value_type __fillc)
+    string string_util::fill(const string& __s, string::size_type __width, alignment_t __align, string::value_type __fillc)
     {
         string::size_type __length = __s.length();
         if (__width > __length)

@@ -29,7 +29,7 @@ namespace ufc {
             pthread_mutexattr_init(&__attr);
 #if defined(PTHREAD_MUTEX_RECURSIVE_NP)
             pthread_mutexattr_settype_np(&__attr, PTHREAD_MUTEX_NORMAL_NP);
-#elif !defined(UFC_VXWORKS)
+#elif !defined(ufc_vxworks)
             pthread_mutexattr_settype(&__attr, PTHREAD_MUTEX_NORMAL);
 #endif
             if (pthread_mutex_init(&_mutex, &__attr))
