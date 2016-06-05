@@ -39,7 +39,11 @@ nobase_include_HEADERS = ufc/ufc.hpp \
                        ufc/exception/assert.hpp \
                        ufc/exception/exception.hpp \
                        ufc/filesystem/file.hpp \
+                       ufc/filesystem/detail/file_win32.hpp \
+                       ufc/filesystem/detail/file_unix.hpp \
                        ufc/filesystem/path.hpp \
+                       ufc/filesystem/detail/path_win32.hpp \
+                       ufc/filesystem/detail/path_unix.hpp \
                        ufc/filesystem/fstream.hpp \
                        ufc/smart_ptr/scoped_array.hpp \
                        ufc/smart_ptr/scoped_ptr.hpp \

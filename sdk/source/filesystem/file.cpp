@@ -12,170 +12,163 @@
 #include "ufc/exception/assert.hpp"
 #include "ufc/exception/exception.hpp"
 #if defined(ufc_os_family_windows)
-#include "filesystem/file_win32.hpp"
+#include <filesystem/detail/file_win32.hpp>
 #else
-#include "filesystem/file_unix.hpp"
+#include <filesystem/detail/file_unix.hpp>
 #endif
 
 namespace ufc {
 
     file::file()
-        : _impl(new private_t)
     {
-        ufc_check_ptr(_impl);
     }
 
     file::file(const string& __path)
-        : _impl(new private_t(__path))
+        : detail::file_impl(__path)
     {
-        ufc_check_ptr(_impl);
     }
 
     file::file(const char* __path)
-        : _impl(new private_t(__path))
+        : detail::file_impl(__path)
     {
-        ufc_check_ptr(_impl);
     }
 
     file::file(const path& __path)
-        : _impl(new private_t(__path.to_string()))
+        : detail::file_impl(__path.to_string())
     {
-        ufc_check_ptr(_impl);
     }   
 
     file::file(const file& __file)
-        : _impl(new private_t(__file.get_path()))
+        : detail::file_impl(__file.get_path_impl())
     {
-        ufc_check_ptr(_impl);
     }
 
     file::~file()
     {
-        memory::delete_ptr(_impl);
     }
 
     file& file::operator = (const file& __file)
     {
-        _impl->set_path(__file.get_path());
+        set_path_impl(__file.get_path_impl());
         return *this;
     }
 
     file& file::operator = (const string& __path)
     {
-        _impl->set_path(__path);
+        set_path_impl(__path);
         return *this;
     }
 
     file& file::operator = (const char* __path)
     {
-        _impl->set_path(__path);
+        set_path_impl(__path);
         return *this;
     }
 
     file& file::operator = (const path& __path)
     {
-        _impl->set_path(__path.to_string());
+        set_path_impl(__path.to_string());
         return *this;
     }
 
     const string& file::get_path() const
     {
-        return _impl->get_path();
+        return get_path_impl();
     }
 
     bool file::exists() const
     {
-        return _impl->exists();
+        return exists_impl();
     }
 
     bool file::can_read() const
     {
-        return _impl->can_read();
+        return can_read_impl();
     }
 
     bool file::can_write() const
     {
-        return _impl->can_write();
+        return can_write_impl();
     }
 
     bool file::can_execute() const
     {
-        return _impl->can_execute();
+        return can_execute_impl();
     }
 
     bool file::is_file() const
     {
-        return _impl->is_file();
+        return is_file_impl();
     }
 
     bool file::is_link() const
     {
-        return _impl->is_link();
+        return is_link_impl();
     }
 
     bool file::is_directory() const
     {
-        return _impl->is_directory();
+        return is_directory_impl();
     }
 
     bool file::is_device() const
     {
-        return _impl->is_device();
+        return is_device_impl();
     }
 
     bool file::is_hidden() const
     {
-        return _impl->is_hidden();
+        return is_hidden_impl();
     }
 
     timestamp file::created() const
     {
-        return _impl->created();
+        return created_impl();
     }
 
     timestamp file::get_last_modified() const
     {
-        return _impl->get_last_modified();
+        return get_last_modified_impl();
     }
 
     file& file::set_last_modified(const timestamp& __ts)
     {
-        _impl->set_last_modified(__ts);
+        set_last_modified_impl(__ts);
         return *this;
     }
 
     int64_t file::get_size() const
     {
-        return _impl->get_size();
+        return get_size_impl();
     }
 
     file& file::set_size(int64_t __size)
     {
-        _impl->set_size(__size);
+        set_size_impl(__size);
         return *this;
     }
 
     file& file::set_writeable(bool __flag)
     {
-        _impl->set_writeable(__flag);
+        set_writeable_impl(__flag);
         return *this;
     }
 
     file& file::set_read_only(bool __flag)
     {
-        _impl->set_writeable(!__flag);
+        set_writeable_impl(!__flag);
         return *this;
     }
 
     file& file::set_executable(bool __flag)
     {
-        _impl->set_executable(__flag);
+        set_executable_impl(__flag);
         return *this;
     }
 
     void file::copy_to(const string& __path) const
     {
-        path __src(_impl->get_path());
+        path __src(get_path_impl());
         path __dest(__path);
         file __dest_file(__path);
         if ((__dest_file.exists() && __dest_file.is_directory()) || __dest.is_directory())
@@ -183,12 +176,12 @@ namespace ufc {
             __dest.make_directory();
             __dest.set_file_name(__src.get_file_name());
         }
-        if (is_directory())
+        if (is_directory_impl())
         {
             file __target(__path);
             __target.mkdirs();
 
-            path src(_impl->get_path());
+            path src(get_path_impl());
             src.make_file();
             file::file_vec __files;
             list(__files);
@@ -199,21 +192,21 @@ namespace ufc {
         }
         else
         {
-            _impl->copy_to(__dest.to_string());
+            copy_to_impl(__dest.to_string());
         }
     }
 
     void file::move_to(const string& __path)
     {
-        copy_to(__path);
+        copy_to_impl(__path);
         remove(true);
-        _impl->set_path(__path);
+        set_path_impl(__path);
     }
 
     void file::rename_to(const string& __path)
     {
-        _impl->rename_to(__path);
-        _impl->set_path(__path);
+        rename_to_impl(__path);
+        set_path_impl(__path);
     }
 
     void file::remove(bool __recursive)
@@ -227,24 +220,24 @@ namespace ufc {
                 it->remove(true);
             }
         }
-        _impl->remove();
+        remove_impl();
     }
 
     bool file::create_file()
     {
-        return _impl->create_file();
+        return create_file_impl();
     }
 
     bool file::mkdir()
     {
-        return _impl->mkdir();
+        return mkdir_impl();
     }
 
     void file::mkdirs()
     {
-        if (!exists())
+        if (!exists_impl())
         {
-            path __p(_impl->get_path());
+            path __p(get_path_impl());
             __p.make_directory();
             if (__p.depth() > 1)
             {
@@ -252,13 +245,13 @@ namespace ufc {
                 file __f(__p.to_string());
                 __f.mkdirs();
             }
-            _impl->mkdir();
+            mkdir_impl();
         }
     }
 
     void file::list(string_vec& __files) const
     {
-        _impl->list(__files);
+        list_impl(__files);
     }
 
     void file::list(file_vec& __files) const
@@ -266,46 +259,46 @@ namespace ufc {
         __files.clear();
 
         string_vec __tmp_files;
-        list(__tmp_files);
+        list_impl(__tmp_files);
         for (string_vec::const_iterator it = __tmp_files.begin(); it != __tmp_files.end(); it++)
         {
-            __files.push_back(file(_impl->get_path() + path::separator() + *it));
+            __files.push_back(file(get_path_impl() + path::separator() + *it));
         }
     }
 
     bool file::operator == (const file& __file) const
     {
-        return get_path() == __file.get_path();
+        return get_path_impl() == __file.get_path_impl();
     }
 
     bool file::operator != (const file& __file) const
     {
-        return get_path() != __file.get_path();
+        return get_path_impl() != __file.get_path_impl();
     }
 
     bool file::operator <  (const file& __file) const
     {
-        return get_path() < __file.get_path();
+        return get_path_impl() < __file.get_path_impl();
     }
 
     bool file::operator <= (const file& __file) const
     {
-        return get_path() <= __file.get_path();
+        return get_path_impl() <= __file.get_path_impl();
     }
 
     bool file::operator >  (const file& __file) const
     {
-        return get_path() > __file.get_path();
+        return get_path_impl() > __file.get_path_impl();
     }
 
     bool file::operator >= (const file& __file) const
     {
-        return get_path() >= __file.get_path();
+        return get_path_impl() >= __file.get_path_impl();
     }
 
     void file::handle_last_error(const string& __path)
     {
-        file::private_t::handle_last_error(__path);
+        handle_last_error_impl(__path);
     }
 
 }//namespace ufc

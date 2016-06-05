@@ -23,11 +23,11 @@ libufc_la_SOURCES = base/object.cpp \
 					exception/assert.cpp \
 					exception/exception.cpp \
 					filesystem/file.cpp \
-					filesystem/file_win32.hpp \
-					filesystem/file_unix.hpp \
+					filesystem/detail/file_win32.hpp \
+					filesystem/detail/file_unix.hpp \
 					filesystem/path.cpp \
-					filesystem/path_win32.hpp \
-					filesystem/path_unix.hpp \
+					filesystem/detail/path_win32.hpp \
+					filesystem/detail/path_unix.hpp \
 					filesystem/fstream.cpp \
 					string/string.cpp \
 					string/string_builder.cpp \

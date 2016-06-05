@@ -16,9 +16,9 @@
 #include "ufc/container/buffer.hpp"
 #include <algorithm>
 #if defined(ufc_os_family_windows)
-#include "filesystem/path_win32.hpp"
+#include "filesystem/detail/path_win32.hpp"
 #else
-#include "filesystem/path_unix.hpp"
+#include "filesystem/detail/path_unix.hpp"
 #endif
 
 namespace ufc {

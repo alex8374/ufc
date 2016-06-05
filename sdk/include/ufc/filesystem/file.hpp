@@ -10,17 +10,23 @@
 #ifndef UFC_FILESYTEAM_FILE_HPP
 #define UFC_FILESYTEAM_FILE_HPP
 
+#include <ufc/base/config.hpp>
 #include <ufc/string/string.hpp>
-#include <ufc/datetime/timestamp.hpp>
 #include <ufc/filesystem/path.hpp>
+#include <ufc/datetime/timestamp.hpp>
 #include <ufc/container/vector.hpp>
+#if defined(ufc_os_family_windows)
+#include <ufc/filesystem/detail/file_win32.hpp>
+#else
+#include <ufc/filesystem/detail/file_unix.hpp>
+#endif
 
 namespace ufc {
 
     /// 
     /// @brief: the file class provides methods for working with a file.
     ///
-    class ufc_api file: virtual public object
+    class ufc_api file: private detail::file_impl
     {
     public:
         typedef vector<file> file_vec;
@@ -83,10 +89,6 @@ namespace ufc {
         bool operator >= (const file& __file) const;
 
         static void handle_last_error(const string& __path);
-
-    private:
-        class private_t;
-        private_t* _impl;
     };
 
 }//namespace ufc
